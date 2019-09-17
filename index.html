@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+ <html>
+  <head>
+    <title>My first Leaflet map</title>  
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="main.css"/>
+  </head>
+  <body>
+    <H1>Palmerston North, New Zealand (North island)</H1>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-hash/0.2.1/leaflet-hash.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.5.0/proj4.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4leaflet/1.0.2/proj4leaflet.js"></script>
+	<script>
+	  //initialize the map         
+  var map = L.map('map').setView([-40.356317, 175.6112388],5);
+
+  //Create baselayer - tiles         
+  var backgroundMap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{
+    attribution: '<a href="http://openstreetmap.org">OpenStreetMap</a>contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+    maxZoom: 19
+	}
+  );
+  
+    // Hash in URL
+var hash = new L.Hash(map);
+
+ // Add markers 
+  var CityCentre = L.marker([-40.356317, 175.6112388]).addTo(map);
+  var myHome = L.marker([-40.35462651, 175.60327202]).addTo(map);
+  var MasseyUniversity = L.marker([-40.38656636, 175.61852574]).addTo(map);
+  var bestPub = L.marker([-40.35589785, 175.60813755]).addTo(map);
+  
+// Add pop-ups
+	var popup = "The Square";
+	CityCentre.bindPopup(popup); 
+	var popup1 = "My home";
+	myHome.bindPopup (popup1);
+	var popup2 = "Massey University, internship provider";
+	MasseyUniversity.bindPopup(popup2);
+	var popup3 = "best coffee in town";
+	bestPub.bindPopup(popup3);
+	
+// Add circle
+	var circle =  L.circle([-40.35462651, 175.60327202], 5, {
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5
+}).addTo(map);
+  var circle =  L.circle([-40.38656, 175.61852], 500, {
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.025
+}).addTo(map);
+  backgroundMap.addTo(map);
+  
+  var polygon = L.polygon(
+  [[
+    [-40.356317, 175.6112388], 
+    [-40.35462651, 175.60327202], 
+    [-40.38656636, 175.61852574], 
+    [-40.35589785, 175.60813755], 
+  ]]).addTo(map);
+  
+</script>
+  </body>
+</html>
